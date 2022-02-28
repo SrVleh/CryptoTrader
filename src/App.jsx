@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import styled from '@emotion/styled'
+
+import Form from './components/Form'
+
 import CryptoImg from './img/crypto_img.png'
 
 
@@ -44,7 +47,10 @@ function App() {
   return (
     <Container>
       <Img src={ CryptoImg } alt='crypto image'/>
-      <Heading>Trade cryptocurrency instantly</Heading>
+      <div>
+        <Heading>Trade cryptocurrency instantly</Heading>
+        <Form/>
+      </div>
     </Container>
   )
 }
