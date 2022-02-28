@@ -1,4 +1,4 @@
-
+import useSelectCryptos from "../hooks/useSelectCryptos";
 import styled from "@emotion/styled";
 
 const InputSubmit = styled.input`
@@ -21,13 +21,18 @@ const InputSubmit = styled.input`
 `
 
 const Form = () => {
-  return (
-    <form>
-      <InputSubmit 
-        type="submit" 
-        value='Trade'/>
-    </form>
-  );
+
+    const [ SelectCryptos ] = useSelectCryptos()
+
+    SelectCryptos()
+
+    return (
+        <form>
+        <InputSubmit 
+            type="submit" 
+            value='Trade'/>
+        </form>
+    );
 }
 
 export default Form;
