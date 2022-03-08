@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useSelectCurrency from "../hooks/useSelectCurrency";
 import styled from "@emotion/styled";
+import Error from "./Error";
 import { currencies } from "../data/currency";
 
 const InputSubmit = styled.input`
@@ -25,6 +26,7 @@ const InputSubmit = styled.input`
 const Form = () => {
 
     const [ cryptos, setCryptos ] = useState([])
+    const [ error, setError ] = useState(false)
 
     const [ currency, SelectCurrency ] = useSelectCurrency('Select your currency', currencies)
     const [ crypto, SelectCrypto ] = useSelectCurrency('Select your crypto', cryptos)
@@ -49,14 +51,32 @@ const Form = () => {
        consumeAPI()
     }, [])
 
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+
+        if([currency, crypto].includes('')){
+            setError(true)
+            return
+        }
+
+        setError(false)
+    }
+
     return (
-        <form>   
-            <SelectCurrency/>
-            <SelectCrypto/>
-            <InputSubmit 
-                type="submit" 
-                value='Trade'/>
-        </form>
+        <>
+            { error && <Error>All fields are required!</Error> }
+            <form
+                onSubmit={ handleSubmit }
+            >   
+                <SelectCurrency/>
+                <SelectCrypto/>
+                <InputSubmit 
+                    type="submit" 
+                    value='Trade'/>
+            </form>
+        </>
     );
 }
 
