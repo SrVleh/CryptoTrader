@@ -1,4 +1,4 @@
-const currency = [
+const currencies = [
     { id: 'USD', name: 'United States dollars' },
     { id: 'EUR', name: 'Europe euro' },
     { id: 'GBP', name: 'Pounds' },
@@ -6,5 +6,5 @@ const currency = [
 ]
 
 export {
-    currency
+    currencies
 }

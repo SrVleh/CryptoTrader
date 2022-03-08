@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import useSelectCurrency from "../hooks/useSelectCurrency";
 import styled from "@emotion/styled";
-import { currency } from "../data/currency";
+import { currencies } from "../data/currency";
 
 const InputSubmit = styled.input`
     background-color: #9497ff;
@@ -23,12 +24,21 @@ const InputSubmit = styled.input`
 
 const Form = () => {
 
-    const [ currency, SelectCurrency ] = useSelectCurrency('Select your currency', currency)
+    const [ currency, SelectCurrency ] = useSelectCurrency('Select your currency', currencies)
+
+    useEffect(() => {
+       const consumeAPI = async () => {
+        const url = "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD"
+        const response = await fetch(url)
+        const result = await response.json()
+        console.log(result.Data)
+       }
+       consumeAPI()
+    }, [])
 
     return (
         <form>   
             <SelectCurrency/>
-            { state }
             <InputSubmit 
                 type="submit" 
                 value='Trade'/>
