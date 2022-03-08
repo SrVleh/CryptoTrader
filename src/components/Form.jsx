@@ -27,6 +27,7 @@ const Form = () => {
     const [ cryptos, setCryptos ] = useState([])
 
     const [ currency, SelectCurrency ] = useSelectCurrency('Select your currency', currencies)
+    const [ crypto, SelectCrypto ] = useSelectCurrency('Select your crypto', cryptos)
 
     useEffect(() => {
        const consumeAPI = async () => {
@@ -51,6 +52,7 @@ const Form = () => {
     return (
         <form>   
             <SelectCurrency/>
+            <SelectCrypto/>
             <InputSubmit 
                 type="submit" 
                 value='Trade'/>
