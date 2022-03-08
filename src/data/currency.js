@@ -2,7 +2,7 @@ const currencies = [
     { id: 'USD', name: 'United States dollars' },
     { id: 'EUR', name: 'Europe euro' },
     { id: 'GBP', name: 'Pounds' },
-    { id: 'YEN', name: 'Japanese yen' }
+    { id: 'JPY', name: 'Japanese yen' }
 ]
 
 export {
