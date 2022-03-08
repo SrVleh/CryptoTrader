@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 
 import Form from './components/Form'
@@ -44,12 +44,23 @@ const Heading = styled.h1`
 `
 
 function App() {
+
+  const [ currencies, setCurrencies ] = useState({})
+  
+  useEffect(() => {
+    if(Object.keys(currencies).length > 0){
+      console.log(currencies)
+    }
+  }, [currencies])
+
   return (
     <Container>
       <Img src={ CryptoImg } alt='crypto image'/>
       <div>
         <Heading>Trade cryptocurrency instantly</Heading>
-        <Form/>
+        <Form
+          setCurrencies={ setCurrencies }
+        />
       </div>
     </Container>
   )
