@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 import Form from './components/Form'
 import Result from './components/Result'
+import Spinner from './components/Spinner'
 
 import CryptoImg from './img/crypto_img.png'
 
@@ -48,16 +49,18 @@ function App() {
 
   const [ currencies, setCurrencies ] = useState({})
   const [ tradeResult, setTradeResult ] = useState({})
+  const [ loading, setLoading ] = useState(false)
   
   useEffect(() => {
     if(Object.keys(currencies).length > 0){
       const tradeCrypto = async () => {
+        setLoading(true)
         const { currency, crypto } = currencies
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${crypto}&tsyms=${currency}`
         const response = await fetch(url)
         const result = await response.json()
         setTradeResult(result.DISPLAY[crypto][currency])
-        console.log(tradeResult)
+        setLoading(false)
       }
 
       tradeCrypto()
@@ -68,12 +71,12 @@ function App() {
     <Container>
       <Img src={ CryptoImg } alt='crypto image'/>
       <div>
-        <Heading>Trade cryptocurrency instantly</Heading>
+        <Heading>Check crypto prices</Heading>
         <Form
           setCurrencies={ setCurrencies }
         />
-
-        { tradeResult.PRICE && <Result tradeResult={ tradeResult } /> }
+        { loading && <Spinner/> }
+        { tradeResult.PRICE && !loading && <Result tradeResult={ tradeResult } /> }
       </div>
     </Container>
   )
