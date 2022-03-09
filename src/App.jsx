@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 
 import Form from './components/Form'
+import Result from './components/Result'
 
 import CryptoImg from './img/crypto_img.png'
 
@@ -56,6 +57,7 @@ function App() {
         const response = await fetch(url)
         const result = await response.json()
         setTradeResult(result.DISPLAY[crypto][currency])
+        console.log(tradeResult)
       }
 
       tradeCrypto()
@@ -70,6 +72,8 @@ function App() {
         <Form
           setCurrencies={ setCurrencies }
         />
+
+        { tradeResult.PRICE && <Result tradeResult={ tradeResult } /> }
       </div>
     </Container>
   )
